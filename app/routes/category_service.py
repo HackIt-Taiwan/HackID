@@ -50,4 +50,4 @@ def get_users_by_category_id(category_id):
     :return: A list of users, or an empty list if none are found.
     """
     users = list(mongo.db.users.find({'category_id': category_id}))
-    return [{'id': str(user['_id']), 'name': user['name']} for user in users]
+    return [{'user_id': str(user['user_id']), 'name': user['name']} for user in users]

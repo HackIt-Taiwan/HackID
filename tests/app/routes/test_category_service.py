@@ -27,12 +27,14 @@ class CategoryServiceTestCase(unittest.TestCase):
     def test_get_users_in_last_category(self):
         self.db.categories.insert_one({'_id': 'cat_3', 'name': 'Category 3', 'parent_id': 'cat_2'})
         self.db.users.insert_many([
-            {'_id': 'user_1', 'name': 'User 1', 'category_id': 'cat_3'},
-            {'_id': 'user_2', 'name': 'User 2', 'category_id': 'cat_3'}
+            {'user_id': 'user_1', 'name': 'User 1', 'category_id': 'cat_3'},
+            {'user_id': 'user_2', 'name': 'User 2', 'category_id': 'cat_3'}
         ])
         response = self.client.get('/categories?parent_id=cat_3')
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response.json['type'], 'user')
+        self.assertEqual(response.json['users'][0]['user_id'], 'user_1')
+        self.assertEqual(response.json['users'][1]['user_id'], 'user_2')
         self.assertEqual(len(response.json['users']), 2)
 
     def test_get_no_subcategories_or_users(self):

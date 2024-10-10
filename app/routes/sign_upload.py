@@ -31,7 +31,7 @@ def upload_signature():
 
         # Update the user's signature and signed-in status in the database
         mongo.db.users.update_one(
-            {'_id': user_id},
+            {'user_id': user_id},
             {'$set': {'signature': signature, 'signed_in': True}},
             upsert=True
         )
