@@ -1,6 +1,7 @@
 from flask import Blueprint
 
 from app.routes.checkin import checkin_bp
+from app.routes.category_service import category_bp
 
 main_bp = Blueprint('main', __name__)
 

@@ -4,22 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6eda8f38-cf15-4728-8ee8-3e4643318a01" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/Counterspell-Staff-Server.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models/checkin_model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/routes.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/routes/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/routes/checkin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/services/checkin_service.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/app/routes/test_checkin.py" afterDir="false" />
+    <list default="true" id="6eda8f38-cf15-4728-8ee8-3e4643318a01" name="Changes" comment="feat: initialize project with check-in API and error handling&#10;&#10;- Initialized Flask project structure with basic configuration (app, config, routes).&#10;- Added check-in API with POST request support.&#10;- Implemented error handling for client, server, and database errors with custom error codes.&#10;- Set up MongoDB connection using PyMongo.&#10;- Added unit tests with enhanced feedback for diagnostics.">
+      <change afterPath="$PROJECT_DIR$/app/routes/category_service.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/routes/encryption.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/app/routes/test_category_service.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/app/routes/test_encryption.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes/checkin.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/checkin.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,6 +53,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python tests.Python tests in test_category_service.py.executor": "Run",
     "Python tests.Python tests in test_checkin.py.executor": "Run",
     "Python.checkin.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -112,15 +106,28 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1728528535559</updated>
-      <workItem from="1728528536806" duration="8000000" />
+      <workItem from="1728528536806" duration="15089000" />
     </task>
+    <task id="LOCAL-00001" summary="feat: initialize project with check-in API and error handling&#10;&#10;- Initialized Flask project structure with basic configuration (app, config, routes).&#10;- Added check-in API with POST request support.&#10;- Implemented error handling for client, server, and database errors with custom error codes.&#10;- Set up MongoDB connection using PyMongo.&#10;- Added unit tests with enhanced feedback for diagnostics.">
+      <option name="closed" value="true" />
+      <created>1728541505701</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1728541505701</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat: initialize project with check-in API and error handling&#10;&#10;- Initialized Flask project structure with basic configuration (app, config, routes).&#10;- Added check-in API with POST request support.&#10;- Implemented error handling for client, server, and database errors with custom error codes.&#10;- Set up MongoDB connection using PyMongo.&#10;- Added unit tests with enhanced feedback for diagnostics." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: initialize project with check-in API and error handling&#10;&#10;- Initialized Flask project structure with basic configuration (app, config, routes).&#10;- Added check-in API with POST request support.&#10;- Implemented error handling for client, server, and database errors with custom error codes.&#10;- Set up MongoDB connection using PyMongo.&#10;- Added unit tests with enhanced feedback for diagnostics." />
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Counterspell_Staff_Server$checkin.coverage" NAME="checkin Coverage Results" MODIFIED="1728537307251" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app/routes" />
-    <SUITE FILE_PATH="coverage/Counterspell_Staff_Server$.coverage" NAME=" Coverage Results" MODIFIED="1728537314957" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/app/routes" />
+    <SUITE FILE_PATH="coverage/Counterspell_Staff_Server$.coverage" NAME=" Coverage Results" MODIFIED="1728547558999" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/app/routes" />
   </component>
 </project>

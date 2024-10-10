@@ -34,7 +34,7 @@ def check_in():
         return jsonify({'message': 'Check in successful'}), 200
 
     except PyMongoError as e:
-        return jsonify({'message': 'Database error occurred', 'error': str(e)}), 5101
+        return jsonify({'message': 'Database error occurred', 'error': str(e)}), 5001
 
     except Exception as e:
-        return jsonify({'message': 'An Unexpected error occurred', 'error': str(e)}), 5901
+        return jsonify({'message': 'An Unexpected error occurred', 'error': str(e)}), 5009
