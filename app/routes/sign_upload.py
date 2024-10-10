@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from pymongo.errors import PyMongoError
 from app import mongo
+from app.utils.encryption import encrypt_data
 
 sign_upload_bp = Blueprint('sign_upload', __name__)
 
@@ -22,26 +23,25 @@ def upload_signature():
         user_id = data.get('user_id')
         signature = data.get('signature')
 
-        # Check for missing or invalid data
         if not data or 'user_id' not in data or 'signature' not in data:
             return jsonify({'message': 'Missing user_id or signature in request data'}), 400
 
         if not user_id or not signature:
             return jsonify({'message': 'Invalid user_id or signature'}), 400
 
-        # Update the user's signature and signed-in status in the database
-        mongo.db.users.update_one(
-            {'user_id': user_id},
-            {'$set': {'signature': signature, 'signed_in': True}},
+        result = mongo.db.users.update_one(
+            {'_id': user_id},  # Match the correct field for user ID
+            {'$set': {'signature': encrypt_data(signature), 'signed_in': True}},
             upsert=True
         )
+
+        if result.matched_count == 0:
+            return jsonify({'message': 'User not found'}), 404
 
         return jsonify({'message': 'Signature upload successful'}), 200
 
     except PyMongoError as e:
-        # Handle database errors
         return jsonify({'message': 'Database error occurred', 'error': str(e)}), 5001
 
     except Exception as e:
-        # Handle unexpected errors
         return jsonify({'message': 'An Unexpected error occurred', 'error': str(e)}), 5009
