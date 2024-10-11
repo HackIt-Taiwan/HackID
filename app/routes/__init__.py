@@ -3,6 +3,7 @@ from flask import Blueprint
 from app.routes.checkin import checkin_bp
 from app.routes.category_service import category_bp
 from app.routes.sign_upload import sign_upload_bp
+from app.routes.RFID_checkin import RFID_check_in_bp
 
 main_bp = Blueprint('main', __name__)
 
