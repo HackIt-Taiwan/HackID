@@ -73,7 +73,7 @@ def create_app():
     # Here to load blueprint
     from app.routes.index import index_bp
     from app.routes.image_viewr import image_bp
-    from app.routes.flash_messages import flash_message_bp
+    from app.routes.api.flash_messages import flash_message_bp
 
     # Here to initialize the app
     connect(host=os.getenv('MONGO_URI'))
