@@ -24,8 +24,8 @@ mail = Mail()
 limiter = Limiter(
     key_func=get_real_ip,
     default_limits=[
-        f"{os.getenv('LIMITER_DAILY_LIMIT', '6000')} per day",
-        f"{os.getenv('LIMITER_HOURLY_LIMIT', '1000')} per hour"
+        f"{os.getenv('LIMITER_DAILY_LIMIT', '40000')} per day",
+        f"{os.getenv('LIMITER_HOURLY_LIMIT', '6000')} per hour"
     ]
 )
 
@@ -72,7 +72,7 @@ def create_app():
 
     # Here to load blueprint
     from app.routes.index import index_bp
-    from app.routes.image_viewr import image_bp
+    from app.routes.api.image_viewr import image_bp
     from app.routes.api.flash_messages import flash_message_bp
 
     # Here to initialize the app
@@ -85,7 +85,7 @@ def create_app():
 
     # Here to register blueprint
     app.register_blueprint(index_bp)
-    app.register_blueprint(image_bp)
+    app.register_blueprint(image_bp, url_prefix='/api/v1')
     app.register_blueprint(flash_message_bp, url_prefix='/api/v1')
 
     # Here to register sockets
