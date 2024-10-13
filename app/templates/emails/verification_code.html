@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HackIt</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            max-width: 560px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 22px;
+            color: #222;
+            margin-bottom: 24px;
+        }
+
+        p {
+            font-size: 15px;
+            margin: 12px 0;
+            color: #444;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 20px;
+            margin-top: 20px;
+            font-size: 15px;
+            color: #fff;
+            background-color: #0066cc;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+
+        .button a {
+            color: inherit;
+            text-decoration: none;
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .button:hover {
+            background-color: #004b99;
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 13px;
+            color: #888;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .uuid {
+            font-size: 13px;
+            color: #666;
+            background-color: #f7f7f7;
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin-top: 10px;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .guide-link {
+            font-size: 13px;
+            color: #0066cc;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .guide-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>{{ name }} 您好，</h1>
+    <p>您於 HackID 上進行了登入行為，請使用以下驗證碼進行登入：</p>
+
+    <p>八位驗證碼：</p>
+    <p class="uuid">{{ code }}</p>
+
+    <p>此驗證碼有效期限為 <strong>10</strong> 分鐘，請勿將此驗證碼洩漏給他人。</p>
+    <p>若有任何問題請透過電子郵件聯繫我們：<a href="official@hackit.tw">official@hackit.tw</a></p>
+    <div class="footer">
+        <p>此為自動發送的郵件，請勿回覆。</p>
+        <p>&copy; 2024 HackIt</p>
+    </div>
+</div>
+</body>
+</html>

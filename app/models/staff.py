@@ -5,6 +5,7 @@ from datetime import datetime
 from mongoengine import Document, UUIDField, StringField, IntField, ListField, DateTimeField, EmbeddedDocumentField, \
     BooleanField, EmbeddedDocument
 from app.models.encrypted_string_field import EncryptedStringField
+from app.utils.encryption import hash_data
 
 class ProjectHistory(EmbeddedDocument):
     """Model representing project history."""
@@ -35,6 +36,7 @@ class Staff(Document):
     name = EncryptedStringField(required=True)
     nickname = EncryptedStringField(required=False)
     email = EncryptedStringField(required=True)
+    email_hash = StringField(required=True)
     phone_number = EncryptedStringField(required=True)
     high_school_stage = EncryptedStringField(required=True)
     city = EncryptedStringField(required=True)
@@ -81,3 +83,22 @@ class Staff(Document):
     # Meta information
     meta = {'collection': 'staff'}
 
+    @classmethod
+    def find_user_by_email(cls, email):
+        """
+        Retrieve a user by their email.
+        :param email: Email of the user.
+        :return: User object if found, None otherwise.
+        """
+        email_hash = hash_data(email)
+        return cls.objects(email_hash=email_hash).first()
+
+
+    @classmethod
+    def find_user_by_uuid(cls, uuid):
+        """
+        Retrieve a user by their UUID.
+        :param uuid: UUID of the user.
+        :return: User object if found, None otherwise.
+        """
+        return cls.objects(uuid=uuid).first()
