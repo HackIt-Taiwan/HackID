@@ -2,6 +2,7 @@
 from flask import Blueprint, render_template, request, session, url_for, redirect, make_response, jsonify
 
 from app import limiter
+from app.models.staff import Staff
 from app.utils.helpers.authorize import verify_jwt_token
 
 authorize_bp = Blueprint('authorize', __name__)
@@ -50,3 +51,40 @@ def logout():
     )
 
     return response
+
+
+@authorize_bp.route('/register')
+def register():
+    token = request.cookies.get('jwt')
+
+    if not token:
+        return redirect(url_for('authorize.login'))
+
+    payload = verify_jwt_token(token)
+    if not payload:
+        return redirect(url_for('authorize.login'))
+
+    user_id = payload.get('user_id')
+    staff = Staff.find_user_by_uuid(user_id)
+    if not staff:
+        return redirect(url_for('authorize.login'))
+
+    staff_data = {
+        'name': staff.name,
+        'email': staff.email,
+        'phone_number': staff.phone_number,
+        'city': staff.city,
+        'school': staff.school,
+        'emergency_contact': {
+            'name': staff.emergency_contact.name if staff.emergency_contact else '',
+            'relationship': staff.emergency_contact.relationship if staff.emergency_contact else '',
+            'phone_number': staff.emergency_contact.phone_number if staff.emergency_contact else ''
+        },
+        'nickname': staff.nickname,
+        'line_id': staff.line_id,
+        'ig_id': staff.ig_id,
+        'introduction': staff.introduction,
+        'avatar_base64': staff.avatar_base64
+    }
+
+    return render_template('register.html', staff_data=staff_data)

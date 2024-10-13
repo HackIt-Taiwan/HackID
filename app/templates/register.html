@@ -1,0 +1,99 @@
+<!-- templates/register.html -->
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>資料填寫 | HackIt</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='register/style.css') }}">
+</head>
+<body>
+{% include 'partials/popup.html' %}
+{% include 'partials/notification.html' %}
+
+<div id="loading" class="loading hidden">
+    <div class="spinner"></div>
+</div>
+
+<div class="container">
+    <h2>資料填寫</h2>
+
+    <form id="registration-form">
+        <!-- Stage 1: Personal Information -->
+        <div class="form-step active">
+            <div class="input-group">
+                <input type="text" id="name" placeholder="姓名" required readonly>
+            </div>
+            <div class="input-group">
+                <input type="email" id="email" placeholder="電子郵件" required readonly>
+            </div>
+            <div class="input-group">
+                <input type="text" id="phone_number" placeholder="電話號碼" required>
+            </div>
+            <div class="input-group">
+                <input type="text" id="city" placeholder="城市" required>
+            </div>
+            <div class="input-group">
+                <input type="text" id="school" placeholder="學校" required>
+            </div>
+            <div class="button-container">
+                <button type="button" id="next-to-step-2">下一步</button>
+            </div>
+        </div>
+
+        <!-- Stage 2: Emergency Contact -->
+        <div class="form-step">
+            <div class="input-group">
+                <input type="text" id="emergency_name" placeholder="緊急聯絡人姓名" required>
+            </div>
+            <div class="input-group">
+                <input type="text" id="emergency_relationship" placeholder="關係" required>
+            </div>
+            <div class="input-group">
+                <input type="text" id="emergency_phone" placeholder="電話號碼" required>
+            </div>
+            <div class="button-container">
+                <button type="button" id="back-to-step-1">上一步</button>
+                <button type="button" id="next-to-step-3">下一步</button>
+            </div>
+        </div>
+
+        <!-- Stage 3: Avatar and Profile -->
+        <div class="form-step">
+            <div class="avatar-upload" id="avatar-upload">
+                <label for="avatar">上傳頭像（拖曳或點擊選擇，最大 3MB）</label>
+                <div class="drop-zone" id="drop-zone">
+                    <span>拖曳圖片到此處或點擊選擇</span>
+                    <input type="file" id="avatar" accept="image/*" required>
+                </div>
+                <div class="avatar-preview hidden">
+                    <img id="avatar-image" src="" alt="頭像預覽">
+                    <button type="button" id="edit-avatar">重新上傳</button>
+                </div>
+            </div>
+            <div class="input-group">
+                <input type="text" id="nickname" placeholder="暱稱" required>
+            </div>
+            <div class="input-group">
+                <input type="text" id="line_id" placeholder="Line ID" required>
+            </div>
+            <div class="input-group">
+                <input type="text" id="ig_id" placeholder="Instagram ID（選填）">
+            </div>
+            <div class="input-group">
+                <textarea id="introduction" placeholder="自我介紹（選填）" rows="4"></textarea>
+            </div>
+            <div class="button-container">
+                <button type="button" id="back-to-step-2">上一步</button>
+                <button type="button" id="submit-button">填寫完成</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+const staffData = {{ staff_data | tojson }};
+</script>
+<script src="{{ url_for('static', filename='register/script.js') }}"></script>
+</body>
+</html>
