@@ -63,6 +63,9 @@ def find_department_recursively(group_name, parent_department_id, access_token):
         return None, f"獲取部門列表失敗: {department_data.get('msg')}"
 
     # Search for the department matching group_name in the current level
+    if 'data' not in department_data or 'items' not in department_data['data']:
+        return None, '部門列表格式錯誤'
+
     departments = department_data['data']['items']
     for department in departments:
         if department['name'] == group_name:
