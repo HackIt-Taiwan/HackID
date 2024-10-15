@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>HackID 服務建置中 | HackIt</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Noto Sans TC', sans-serif;
+            background: linear-gradient(135deg, #1e1e1e 0%, #121212 100%);
+            color: #e0e0e0;
+            overflow: hidden;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            animation: fadeIn 1s ease;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #ffffff;
+            animation: textGlow 2s ease-in-out infinite;
+            line-height: 1.2;
+        }
+
+        p {
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+            color: #a0a0a0;
+            line-height: 1.6;
+            animation: fadeUp 1s ease forwards;
+            opacity: 0;
+            max-width: 600px;
+        }
+
+        .spinner {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 30px;
+            position: relative;
+            animation: rotate 2s linear infinite;
+        }
+
+        .spinner::before,
+        .spinner::after {
+            content: '';
+            box-sizing: border-box;
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 8px solid transparent;
+        }
+
+        .spinner::before {
+            border-top-color: #bb86fc;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        .spinner::after {
+            border-bottom-color: #03dac6;
+            animation: spin 1s ease-in-out infinite reverse;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            font-size: 0.875rem;
+            color: #555555;
+            text-align: center;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        /* Background animation */
+        .background {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background-image: radial-gradient(circle at center, #bb86fc, transparent 70%);
+            animation: rotateBg 20s linear infinite;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes textGlow {
+            0%, 100% {
+                text-shadow: 0 0 10px #bb86fc, 0 0 20px #bb86fc;
+            }
+            50% {
+                text-shadow: 0 0 20px #bb86fc, 0 0 30px #bb86fc;
+            }
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes rotate {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes rotateBg {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            p {
+                font-size: 1.125rem;
+            }
+
+            .spinner {
+                width: 70px;
+                height: 70px;
+            }
+
+            .footer {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+
+            .spinner {
+                width: 60px;
+                height: 60px;
+            }
+
+            .footer {
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="background"></div>
+
+<div class="container">
+    <h1>HackID 服務建置中...</h1>
+    <div class="spinner"></div>
+    <p>HackID 是工作人員後台系統，資訊組正積極開發中。</p>
+    <p>有任何疑問請在群組上提出！</p>
+    <div class="footer">感謝您的耐心等候，敬請期待！</div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Fade in paragraphs sequentially
+        const paragraphs = document.querySelectorAll('p');
+        paragraphs.forEach((p, index) => {
+            p.style.animationDelay = `${0.5 + index * 0.5}s`;
+        });
+
+        // Adjust background animation speed on mobile devices
+        if (window.innerWidth <= 480) {
+            document.querySelector('.background').style.animationDuration = '30s';
+        }
+    });
+</script>
+
+</body>
+</html>
