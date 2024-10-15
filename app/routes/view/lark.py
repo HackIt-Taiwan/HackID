@@ -27,6 +27,6 @@ def create_lark():
 
     # If lark_info already exists, redirect to dashboard
     if staff.lark_info:
-        return redirect(url_for('dashboard.home'))
+        return redirect(url_for('index.home'))
 
     return render_template('create_lark.html', staff=staff)

@@ -29,4 +29,4 @@ def home():
     if not staff.lark_info:
         return redirect(url_for('lark.create_lark'))
 
-    return redirect(url_for('dashboard.home'))
+    return render_template('coming_soon.html')

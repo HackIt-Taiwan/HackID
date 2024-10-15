@@ -69,6 +69,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     input.value = phoneNumber;
                 }
 
+                if (phoneNumber.startsWith('+8869')) {
+                    phoneNumber = '0' + phoneNumber.substring(4);
+                    input.value = phoneNumber;
+                }
+
                 if (phoneNumber.length !== 10 || !/^\d{10}$/.test(phoneNumber)) {
                     input.classList.add('input-error');
                     showError({title: '錯誤', message: '請輸入有效的 10 位數電話號碼'});

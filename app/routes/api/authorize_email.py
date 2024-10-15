@@ -163,6 +163,8 @@ def save_registration_data():
         phone_number = phone_number.strip()
         if phone_number.startswith('8869'):
             phone_number = '0' + phone_number[3:]
+        elif phone_number.startswith('+8869'):
+            phone_number = '0' + phone_number[4:]
         if len(phone_number) != 10 or not phone_number.isdigit():
             return jsonify({'error': '手機號碼無效，必須為10位數字'}), 400
 
