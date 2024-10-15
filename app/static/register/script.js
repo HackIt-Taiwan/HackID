@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const countdownInterval = setInterval(() => {
                     if (countdown <= 0) {
                         clearInterval(countdownInterval);
-                        window.location.href = '/dashboard';
+                        window.location.href = '/';
                     } else {
                         showSuccess({
                             title: '填寫成功',

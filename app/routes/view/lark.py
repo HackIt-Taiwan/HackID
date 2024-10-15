@@ -1,14 +1,13 @@
-# app/routes/view/index.py
+# app/routes/view/lark.py
 from flask import Blueprint, render_template, request, redirect, url_for
-
 from app.models.staff import Staff
 from app.utils.helpers.authorize import verify_jwt_token
 
-index_bp = Blueprint('index', __name__)
+lark_bp = Blueprint('lark', __name__)
 
 
-@index_bp.route('/')
-def home():
+@lark_bp.route('/create-lark')
+def create_lark():
     token = request.cookies.get('jwt')
 
     if not token:
@@ -26,7 +25,8 @@ def home():
     if not staff.is_signup:
         return redirect(url_for('authorize.register'))
 
-    if not staff.lark_info:
-        return redirect(url_for('lark.create_lark'))
+    # If lark_info already exists, redirect to dashboard
+    if staff.lark_info:
+        return redirect(url_for('dashboard.home'))
 
-    return redirect(url_for('dashboard.home'))
+    return render_template('create_lark.html', staff=staff)

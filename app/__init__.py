@@ -3,7 +3,7 @@ import json
 from datetime import timedelta
 import os
 
-from flask import Flask, jsonify, make_response, Response
+from flask import Flask, Response, render_template
 from flask_cors import CORS
 from flask_session import Session
 from flask_socketio import SocketIO
@@ -35,6 +35,10 @@ def ratelimit_handler(e):
     response_data = {"error": "請求過於頻繁，請稍後再試"}
     response = Response(json.dumps(response_data, ensure_ascii=False), status=429, mimetype='application/json')
     return response
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('coming_soon.html'), 404
 
 def create_app():
     global openai, app
@@ -76,7 +80,9 @@ def create_app():
     # Here to load blueprint
     from app.routes.view.index import index_bp
     from app.routes.view.authorize import authorize_bp
+    from app.routes.view.lark import lark_bp
     from app.routes.api.authorize_email import authorize_api_email_bp
+    from app.routes.api.lark import lark_api_bp
     from app.routes.api.image_viewr import image_bp
     from app.routes.api.flash_messages import flash_message_bp
 
@@ -90,8 +96,10 @@ def create_app():
 
     # Here to register blueprint
     app.register_blueprint(index_bp)
+    app.register_blueprint(lark_bp)
     app.register_blueprint(authorize_bp, url_prefix='/auth')
     app.register_blueprint(authorize_api_email_bp, url_prefix='/api/v1')
+    app.register_blueprint(lark_api_bp, url_prefix='/api/v1')
     app.register_blueprint(image_bp, url_prefix='/api/v1')
     app.register_blueprint(flash_message_bp, url_prefix='/api/v1')
 

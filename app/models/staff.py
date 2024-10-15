@@ -26,6 +26,14 @@ class EmergencyContact(EmbeddedDocument):
     phone_number = EncryptedStringField(required=True)
 
 
+class LarkInfo(EmbeddedDocument):
+    """Model representing emergency contacts."""
+
+    # Basic personal information
+    user_id = EncryptedStringField(required=True)
+    enterprise_email = EncryptedStringField(required=True)
+
+
 class Staff(Document):
     """Model representing staff members."""
 
@@ -61,7 +69,7 @@ class Staff(Document):
     active_status = StringField(required=False, choices=['Active', 'Inactive', 'Suspended'])  # 活躍狀態
 
     # Permission level (-1, 0, 1, 2, 3, 4, 5, 6)
-    permission_level = IntField(default=2, choices=[-1, 0, 1, 2, 3, 4, 5, 6])
+    permission_level = IntField(default=0, choices=[-1, 0, 1, 2, 3, 4, 5, 6])
     # -1: 封殺；0: 成員；1: 組副負責人；2: 組負責人；3: 部負責人；4: 負責人；5: 顧問；6: 外星人
 
     # Additional details
@@ -76,6 +84,7 @@ class Staff(Document):
     attendance_records = ListField(EncryptedStringField(), required=False)
     last_login = EncryptedStringField(required=False)
     is_signup = BooleanField(default=False)
+    lark_info = EmbeddedDocumentField('LarkInfo', required=False)
 
     # TODO system integration
     available_time_slots = ListField(EncryptedStringField(), required=False)  # 未來將與日曆整合

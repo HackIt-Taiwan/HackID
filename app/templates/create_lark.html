@@ -1,0 +1,115 @@
+<!-- templates/create_lark.html -->
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>飛書帳號 | HackIt</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='create_lark/style.css') }}">
+</head>
+<body>
+
+{% include 'partials/popup.html' %}
+{% include 'partials/notification.html' %}
+
+<div id="loading" class="loading hidden">
+    <div class="spinner"></div>
+</div>
+
+<div class="container">
+    <h2>創建飛書帳號</h2>
+    <div class="instruction-box">
+        <p>我們將根據您所填寫的資料為您創建飛書帳號。</p>
+        <p>請輸入您希望的個人信箱名稱：</p>
+    </div>
+    <form id="email-creation-form">
+        <div class="input-group">
+            <input type="text" id="desired_email" placeholder="您的信箱名稱" required>
+            <span class="email-domain">@staff.hackit.tw</span>
+        </div>
+        <div class="button-container">
+            <button type="button" id="submit-button">送出</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const submitButton = document.getElementById('submit-button');
+        const desiredEmailInput = document.getElementById('desired_email');
+        const loading = document.getElementById('loading');
+
+        submitButton.addEventListener('click', () => {
+            if (validateInput()) {
+                const desiredEmail = desiredEmailInput.value.trim();
+                showConfirmation(desiredEmail);
+            }
+        });
+
+        function validateInput() {
+            const desiredEmail = desiredEmailInput.value.trim();
+            if (!desiredEmail) {
+                desiredEmailInput.classList.add('input-error');
+                showError({ title: '錯誤', message: '請輸入您希望的個人信箱名稱' });
+                return false;
+            }
+            desiredEmailInput.classList.remove('input-error');
+            return true;
+        }
+
+        function showConfirmation(email) {
+            const confirmation = confirm(`請確認您的企業信箱將設為：\n${email}@staff.hackit.tw\n\n按「確定」繼續，按「取消」返回修改。`);
+            if (confirmation) {
+                showLoading();
+                createEmail(email);
+            }
+        }
+
+        function createEmail(email) {
+            fetch('/api/v1/create-lark', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ desired_email: email }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                hideLoading();
+                if (data.error) {
+                    showError({ title: '錯誤', message: data.error });
+                } else {
+                    let countdown = 8;
+                    const countdownInterval = setInterval(() => {
+                        if (countdown <= 0) {
+                            clearInterval(countdownInterval);
+                            window.location.href = '/';
+                        } else {
+                            showSuccess({
+                                title: '填寫成功',
+                                message: `已寄送企業邀請至您的個人信箱，請注意查收！\n將於 ${countdown} 秒後自動跳轉...`
+                            });
+                        }
+                        countdown -= 1;
+                    }, 1000);
+                }
+            })
+            .catch(error => {
+                hideLoading();
+                console.error('Error:', error);
+                showError({ title: '錯誤', message: '意外錯誤，請稍後再試' });
+            });
+        }
+
+        function showLoading() {
+            loading.classList.remove('hidden');
+        }
+
+        function hideLoading() {
+            loading.classList.add('hidden');
+        }
+    });
+</script>
+
+</body>
+</html>

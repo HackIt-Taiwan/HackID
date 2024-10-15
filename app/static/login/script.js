@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const countdownInterval = setInterval(() => {
                     if (countdown <= 0) {
                         clearInterval(countdownInterval);
-                        window.location.reload();
+                        window.location.href = '/';
                     } else {
                         showSuccess({
                             title: '登入成功',
