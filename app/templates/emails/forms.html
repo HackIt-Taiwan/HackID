@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HackIt</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            max-width: 560px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 22px;
+            color: #222;
+            margin-bottom: 24px;
+        }
+
+        p {
+            font-size: 15px;
+            margin: 12px 0;
+            color: #444;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 6px 8px;
+            font-size: 14px;
+            color: #fff;
+            background-color: #0066cc;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+
+        .button a {
+            color: inherit;
+            text-decoration: none;
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .button:hover {
+            background-color: #004b99;
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 13px;
+            color: #888;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .uuid {
+            font-size: 13px;
+            color: #666;
+            background-color: #f7f7f7;
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin-top: 10px;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .guide-link {
+            font-size: 15px;
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .guide-link:hover {
+            text-decoration: underline;
+        }
+
+        .video-link img {
+            width: 100%;
+            max-width: 560px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>{{ name }} 您好，</h1>
+    <p>您收到了一封 <strong>留存意願調查表</strong> 問卷。以下是針對該問卷的說明</p>
+    <p class="uuid">因應黑客松延期舉辦所進行的留存意願調查！請進速完成填寫，謝謝！</p>
+    <p>問卷詳細資訊</p>
+    <p class="uuid">問卷名稱：留存意願調查表<br>發出日期：2024.11.07<br>發出部門：行政部<br>結果限閱：僅限總召<br>連結有效期：14天</p>
+
+    <p>請點擊以下按鈕來填寫該問卷：</p>
+    <div class="button">
+        <a href="{{ url }}">前往填寫</a>
+    </div>
+
+    <p>若有任何疑問，歡迎透過電子郵件聯繫我們：<a href="mailto:official@hackit.tw">official@hackit.tw</a></p>
+
+    <div class="footer">
+        <p>此為自動發送的郵件，請勿回覆。</p>
+        <p>&copy; 2024 HackIt</p>
+    </div>
+</div>
+</body>
+</html>

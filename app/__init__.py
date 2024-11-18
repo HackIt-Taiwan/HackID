@@ -85,6 +85,8 @@ def create_app():
     from app.routes.api.lark import lark_api_bp
     from app.routes.api.image_viewr import image_bp
     from app.routes.api.flash_messages import flash_message_bp
+    from app.routes.view.forms import forms_bp
+    from app.routes.api.forms import forms_api_bp
 
     # Here to initialize the app
     connect(host=os.getenv('MONGO_URI'))
@@ -97,6 +99,8 @@ def create_app():
     # Here to register blueprint
     app.register_blueprint(index_bp)
     app.register_blueprint(lark_bp)
+    app.register_blueprint(forms_bp)
+    app.register_blueprint(forms_api_bp, url_prefix='/api/v1')
     app.register_blueprint(authorize_bp, url_prefix='/auth')
     app.register_blueprint(authorize_api_email_bp, url_prefix='/api/v1')
     app.register_blueprint(lark_api_bp, url_prefix='/api/v1')
