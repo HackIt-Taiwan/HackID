@@ -106,7 +106,6 @@ def api_verify_code():
 
 
 @authorize_api_email_bp.route('/verify_jwt', methods=['POST'])
-@limiter.limit("6 per minute")
 def api_verify_jwt():
     """API endpoint for SSO clients to verify the JWT token and get user data."""
     api_key = request.headers.get('X-API-Key')
